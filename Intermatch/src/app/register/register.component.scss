@@ -1,0 +1,111 @@
+$color-black: #343F4B;
+$color-orange: #B8977E;
+$font-arvo:'Arvo', serif;
+
+.mat-toolbar{
+    height: 15%;
+    top: 0px;
+    overflow: hidden;
+    flex: 1 1 auto;
+    padding: 0;
+    margin:0;
+    .colorbox{
+        margin:0;
+        width: 12%;       
+        .bl{
+            width: 50%;
+            height: 200px;
+            background: $color-black;
+            float: left;
+
+        }
+        .or{
+            width: 50%;
+            height: 200px;
+            background: $color-orange;
+            float: left;
+        }
+    }
+    a{
+        text-decoration: none;
+        margin: 0 auto; 
+        width: 30%;
+        img{
+           
+           height: 80px;    
+        }
+    }
+
+ 
+}
+.main-container{
+    background-color:$color-orange;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+    .row{
+        background-color:$color-black;
+        margin: 0% 6% 10% 6%;
+        width:88%;
+        height: 75%;
+        box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+        .col-sm-3{
+            padding-top:15%;
+            float: left;
+            padding-left:0;
+            
+            .mat-raised-button{
+                width: 60%;
+                height: 50px;
+                border-radius: 0;
+                margin-bottom: 5%;
+                
+            }
+            .active{
+                color:black;
+                background: wheat;
+            }
+        }
+        .col-sm-9{
+            padding-top:5%;
+            padding-right: 35%;
+            padding-left: 5%;
+            h1{
+                text-align: center;
+                color: white;
+                font-family: $font-arvo;
+                padding: 15px;
+                border-bottom: 1px solid $color-orange;
+                border-top: 1px solid $color-orange;
+            }
+            .mat-form-field{
+                width: 100%;
+                font-size: 18px;
+                color:white;
+                input{
+                    color:white;
+                    font-size:15px;
+                }
+            }
+            .mat-raised-button{
+                width: 100%;
+                height: 50px;
+                background:white;
+                border-color:1px solid wheat;
+                font-family: $font-arvo;
+                font-weight: 900;
+                
+            }
+            .mat-slide-toggle{
+                font-family: $font-arvo;
+                color: white;
+                font-size: 18px;
+                float: right;
+                margin-bottom: 20px;
+            }
+
+        }
+    }
+ 
+}
+

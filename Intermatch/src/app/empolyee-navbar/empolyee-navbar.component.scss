@@ -1,0 +1,57 @@
+$color-black: #343F4B;
+$color-orange: #B8977E;
+$font-arvo:'Arvo', serif;
+
+.mat-toolbar{
+    height: 15%;
+    top: 0px;
+    overflow: hidden;
+    flex: 1 1 auto;
+    padding: 0;
+    margin:0;
+    .colorbox{
+        margin:0;
+        width: 12%;       
+        .bl{
+            width: 50%;
+            height: 200px;
+            background: $color-black;
+            float: left;
+
+        }
+        .or{
+            width: 50%;
+            height: 200px;
+            background: $color-orange;
+            float: left;
+        }
+    }
+    a{
+        text-decoration: none;
+        margin: 0 auto; 
+        width: 30%;
+        img{
+           
+           height: 80px;    
+        }
+    }
+    .space{
+        flex: 1 1 auto;
+    }
+    .buttonbox{
+        padding-right: 40px;
+        .border-left{
+            border-left: 3px solid $color-black;
+            
+        }
+        .mat-flat-button{
+            padding: 30px;
+            font-size: 16px;
+            
+            background: transparent;
+            
+        }
+    }
+
+ 
+}

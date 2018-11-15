@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Arvo');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.error-snackbar{
+    background: #343F4B;
+    width: 400px;
+    height: 100px;
+    color:white;
+    font-size: 30px;
+}
+/*
+$color-black: #343F4B;
+$color-orange: #B8977E;
+*/
+.mat-form-field-appearance-outline .mat-form-field-outline{
+    color: wheat;
+  }
+
+.mat-form-field-appearance-outline .mat-form-field-ripple{
+    color:#B8977E;
+}
+.mat-slide-toggle .mat-slide-toggle-frame{
+    border-color: wheat;
+    width: 20px;
+    height: 20px;
+}
+.mat-input-underline{
+    background-color: wheat;
+}
+.mat-step-header .mat-step-icon {
+    background-color: wheat;
+    color:#343F4B;
+  } 

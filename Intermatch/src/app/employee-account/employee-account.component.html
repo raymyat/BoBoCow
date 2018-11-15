@@ -1,0 +1,95 @@
+<app-empolyee-navbar></app-empolyee-navbar>
+<div class="orange">
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <button mat-raised-button (click)="onProfile()">Profile</button><br>
+            <button mat-raised-button (click)="onEducation()">Educations</button><br>
+            <button mat-raised-button (click)="onExperience()">Experiences</button><br>
+        </div>
+        <div class="col-sm-9">
+            <form *ngIf="profile">
+                <mat-form-field appearance="legacy">
+                    <input matInput placeholder="Email" [value]="user_email">
+                </mat-form-field> <br>
+                <mat-form-field appearance="legacy">
+                    <input matInput placeholder="Username" [value]="user_name">
+                </mat-form-field> <br>
+                <mat-form-field appearance="legacy">
+                    <input matInput placeholder="Full Name" required>
+                </mat-form-field> <br>
+                <mat-form-field appearance="legacy">
+                    <input matInput [matDatepicker]="picker" placeholder="Birth Date" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field> <br>
+
+                <mat-form-field appearance="legacy" hintLabel="Min 300 characters.">
+                    <textarea matInput #input maxlength="3000" minlength="300" placeholder="BIO" required></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/3000</mat-hint>
+                </mat-form-field> <br>
+                <mat-form-field>
+                    <mat-select placeholder="Specialization">
+                        <mat-option *ngFor="let specialization of specializations" [value]="specialization.viewValue">
+                            {{specialization.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> <br>
+                <mat-form-field class="skills-list">
+                    <mat-chip-list #chipList formContr>
+                        <mat-chip *ngFor="let skill of skills" [selectable]="selectable" [removable]="removable"
+                            (removed)="remove(skill)">
+                            {{skill.name}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Add skills..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+
+                </mat-form-field>
+            </form>
+            <form *ngIf="education">
+                <mat-form-field appearance="legacy">
+                    <input matInput placeholder="Institution Name">
+                </mat-form-field> <br>
+
+                <table class="example-full-width" cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field appearance="legacy">
+                                <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" required>
+                                <mat-datepicker-toggle matSuffix [for]="startDatePicker">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #startDatePicker></mat-datepicker>
+                            </mat-form-field>
+                        </td>
+
+                        <td>
+                            <mat-form-field appearance="legacy">
+                                <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" required>
+                                <mat-datepicker-toggle matSuffix [for]="endDatePicker">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #endDatePicker></mat-datepicker>
+                            </mat-form-field> <br>
+                        </td>
+                    </tr>
+                </table>
+
+                <mat-form-field appearance="legacy">
+                    <input matInput placeholder="Certification">
+                </mat-form-field> <br>
+
+
+            </form>
+            <form *ngIf="experience">
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+</div>

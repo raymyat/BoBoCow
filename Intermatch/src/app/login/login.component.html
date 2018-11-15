@@ -1,0 +1,42 @@
+<mat-toolbar>
+  <div class="colorbox w3-animate-left">
+    <div class="bl"></div>
+    <div class="or"></div>
+  </div>
+
+  <a href="/landing-page"> <img src="../../assets/images/logo.png" alt="logo"></a>
+
+</mat-toolbar>
+<div class="main-container ">
+
+
+    <div class="row">
+      <div class="button col-sm-3">
+        <button mat-raised-button class="active">
+          <mat-icon svgIcon="black-logo" matPrefix></mat-icon> &nbsp; Login
+        </button>
+        <button mat-raised-button (click)="moveToRegister()">Register</button>
+
+      </div>
+      <div class="col-sm-9">
+
+        <h1> Login </h1>
+        <form [formGroup]="loginForm">
+
+          <mat-form-field appearance="outline">
+            <mat-label style="color:white;">Email Address</mat-label>
+            <input matInput formControlName="email" type="email" id="exampleInputEmail1">
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field> <br>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label style="color:white;">Password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" id="passwordInput">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>
+          <button mat-raised-button type="button" (click)="login()">Log in</button>
+
+        </form>
+      </div>
+
+  </div>
+</div>

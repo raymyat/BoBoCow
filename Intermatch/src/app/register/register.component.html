@@ -1,0 +1,62 @@
+<mat-toolbar>
+  <div class="colorbox w3-animate-left">
+    <div class="bl"></div>
+    <div class="or"></div>
+  </div>
+
+  <a href="/landing-page"> <img src="../../assets/images/logo.png" alt="logo"></a>
+
+</mat-toolbar>
+
+<div class="main-container ">
+  <div class="row">
+  
+    <div class="button col-sm-3"(click)="moveToLogin()">
+      <button mat-raised-button> Login
+      </button>
+      <button mat-raised-button  class="active" >
+          <mat-icon svgIcon="black-logo" matPrefix></mat-icon> &nbsp;Register</button>
+
+    </div>
+
+    <div class="col-sm-9">
+        <h1> Register </h1>
+       <form [formGroup]="registerForm">
+
+          <mat-form-field appearance="outline">
+              <mat-label style="color:white;">Email Address</mat-label>
+              <input matInput formControlName="email" type="email">
+              <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+  
+            <mat-form-field appearance="outline">
+                <mat-label style="color:white;">Username</mat-label>
+                <input matInput formControlName="username" type="username">
+                <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+          
+     
+          <mat-form-field appearance="outline" class="form-field">
+              <mat-label style="color:white;">Password</mat-label>
+              <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+    
+          <mat-form-field appearance="outline" class="form-field">
+              <mat-label style="color:white;">Confirm Password</mat-label>
+              <input matInput formControlName="cpass" [type]="hide ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+       
+            <mat-slide-toggle type="checkbox"
+            formControlName="user_type"   
+            [(ngModel)] = "checked"
+            (change)="checkusertype(checked? 'Company': 'Employee')" >
+            Register as Company. 
+          </mat-slide-toggle>
+          <button mat-raised-button type="button" (click)="register()">Register</button>
+      
+      </form>
+    </div>
+  </div>
+</div>

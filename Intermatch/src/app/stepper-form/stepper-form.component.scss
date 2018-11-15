@@ -1,0 +1,98 @@
+$color-black: #343F4B;
+$color-orange: #B8977E;
+$font-arvo:'Arvo', serif;
+
+.mat-toolbar{
+    height: 15%;
+    top: 0px;
+    overflow: hidden;
+    flex: 1 1 auto;
+    padding: 0;
+    margin:0;
+    .colorbox{
+        margin:0;
+        width: 12%;       
+        .bl{
+            width: 50%;
+            height: 200px;
+            background: $color-black;
+            float: left;
+
+        }
+        .or{
+            width: 50%;
+            height: 200px;
+            background: $color-orange;
+            float: left;
+        }
+    }
+    a{
+        text-decoration: none;
+        margin: 0 auto; 
+        width: 30%;
+        img{
+           
+           height: 80px;    
+        }
+    }
+
+ 
+}
+.black{
+    height: 100%;
+    float: left;
+    width: 6%;
+    background: $color-black;
+}
+
+textarea{
+    height: 70px;
+}
+.mat-input-underline{
+    color: wheat;
+}
+form{
+    margin-left: 20%;
+    margin-right: 20%;
+    .mat-form-field{
+        font-style: $font-arvo;
+        font-size: 18px;
+        padding-bottom: 20px;
+        width: 600px;
+    }
+    .mat-raised-button{
+        border: 1px solid $color-orange;
+        color:$color-black;
+        margin-top: 20px;
+        width: 150px;
+        
+    }
+    td .mat-form-field{
+        width: 270px;
+        padding-right: 30px;
+    }
+    .mat-icon-button{
+        width: 200px;
+    }
+    .removeChunk{
+        width: 50px;
+        margin-left: 600px;
+    }
+    hr{
+        width: 700px;
+        border-bottom: 1px solid black;
+    }
+    .dynamicFormField .mat-form-field{
+        padding-bottom: 5px;
+
+    }
+}
+.mat-card{
+    margin-top: 40px;
+    .mat-form-field{
+        font-style: $font-arvo;
+        font-size: 18px;
+        padding-bottom: 20px;
+        width: 600px;
+    }
+}

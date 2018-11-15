@@ -1,0 +1,44 @@
+<app-empolyee-navbar></app-empolyee-navbar>
+<div class="orange">
+</div>
+<div class="container">
+    <mat-tab-group>
+        <mat-tab label="Discovered">
+
+            <mat-card *ngFor="let jobPost of jobPost" (click)="openDialog()">
+                <mat-card-title>
+                    {{jobPost.title}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{jobPost.description}}
+                </mat-card-subtitle>
+                <mat-card-actions>
+                    <button mat-stroked-button>apply</button>
+                </mat-card-actions>
+            </mat-card>
+
+
+        </mat-tab>
+        <mat-tab label="Matched">
+            <mat-card *ngFor="let jobPost of jobPost">
+                <mat-card-title>
+                    {{jobPost.title}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{jobPost.description}}
+                </mat-card-subtitle>
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="Applied">
+            <mat-card *ngFor="let jobPost of jobPost">
+                <mat-card-title>
+                    {{jobPost.title}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{jobPost.description}}
+                </mat-card-subtitle>
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>
