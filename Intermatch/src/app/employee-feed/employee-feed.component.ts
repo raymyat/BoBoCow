@@ -9,7 +9,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./employee-feed.component.scss']
 })
 export class EmployeeFeedComponent implements OnInit {
-  jobPosts: jobPost[] = [];
+  jobPosts: any[] = [];
   _id:String;
   title: String;
   description: String;
@@ -30,6 +30,7 @@ export class EmployeeFeedComponent implements OnInit {
         this._user.getFeed(this.user_id).subscribe(
           data => {
             this.assignJobData(data);
+            this.jobPosts.push(data);
             console.log(data);
 
           },
@@ -47,7 +48,6 @@ export class EmployeeFeedComponent implements OnInit {
   }
   
   assignJobData(data) {
-    this._id = data._id;
     this.title = data.title;
     this.description = data.description;
     this.start_date = data.start_date;
