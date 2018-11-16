@@ -12,9 +12,8 @@ var app = express();
 var cors = require('cors');
 app.use(cors({
   //origin is the domain that you want to allow
-  origin:['http://localhost:4200','http://127.0.0.1:4200'],
+  origin:['http://localhost:4200','http://127.0.0.1:4200',' https://agile-bayou-24340.herokuapp.com/'],
   credentials: true
-
 }));
 var mongoose =require('mongoose');
 mongoose.Promise = global.Promise;
@@ -23,11 +22,7 @@ mongoose.connect('mongodb://admin1234:meow1234@ds046677.mlab.com:46677/intermatc
 var passport = require('passport');
 var session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-app.use(express.static(path.join(__dirname,'../dist/project')));
-app.use(bodyParser.json());
-app.get('/', (req,res)=>{
-    res.sendFile(path.join(__dirname,'../dist/project/index.html'));
-});
+
 app.use(session({
   //name of cookie
   name:'myname.sid',
@@ -54,6 +49,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.json());
 
 
 app.use('/users', usersRouter);
