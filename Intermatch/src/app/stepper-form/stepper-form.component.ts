@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { UserService } from '../user.service';
 import { MatChipInputEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
 
-export interface Skill {
-  name: string;
-}
 export interface Specialization {
   value: string;
   viewValue: string;
@@ -19,20 +16,19 @@ export interface Specialization {
   styleUrls: ['./stepper-form.component.scss']
 })
 export class StepperFormComponent implements OnInit {
-  //mat-chips
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  skills: Skill[] = [];
-
+  //chips
+  visible: boolean = true;
+  selectable: boolean = true;
+  removable: boolean = true;
+  addOnBlur: boolean = true;
+  // Enter, comma
+  separatorKeysCodes = [ENTER, COMMA];
   //mat-stepper
   isLinear = false;
   user_type: String = '';
   user_email: String = '';
   user_name: String = '';
-
+  _id: String = '';
   specializations: Specialization[] = [
     { value: "specialization-01", viewValue: "Computers and Technology" },
     { value: "specialization-02", viewValue: "Health Care and Allied Health" },
@@ -51,7 +47,9 @@ export class StepperFormComponent implements OnInit {
   userDetails(data) {
     this.user_email = data.email;
     this.user_name = data.username;
-    this.user_type = data.user_type
+    this.user_type = data.user_type;
+    this._id = data._id;
+
   }
   //forms
   profileFormGroup: FormGroup;
@@ -62,18 +60,18 @@ export class StepperFormComponent implements OnInit {
   educations: FormArray;
   experiences: FormArray;
 
-  constructor(private _formBuilder: FormBuilder, private _user: UserService, private router: Router) {
+  constructor(private _formBuilder: FormBuilder, private _user: UserService,
+    private router: Router) {
     this._user.user().subscribe(
       data => {
         this.userDetails(data);
         console.log(this.user_email);
         if (this.user_type == "Employee") {
-           this.employeeDetails = true;
-           console.log(this.employeeDetails);
+          this.employeeDetails = true;
+          console.log(this.employeeDetails);
         } else if (this.user_type == "Company") {
-         this.companyDetails = true; 
+          this.companyDetails = true;
         }
-
 
       },
       error => console.log('error')
@@ -86,15 +84,18 @@ export class StepperFormComponent implements OnInit {
 
   ngOnInit() {
 
+    //employee form
     this.profileFormGroup = this._formBuilder.group({
-      email: [{ value: this.user_email, disabled: true }],
-      username: [{ value: this.user_name, disabled: true }],
-      fullname: ['', Validators.required],
+      email: [ '',Validators.required],
+      username: [ '',Validators.required],
+      full_name: ['', Validators.required],
       birthdate: ['', Validators.required],
-      description: ['', Validators.required],
-      address: ['', Validators.required],
+      description: this._formBuilder.group({
+        content: ['', Validators.required]
+      }),
       specialization: ['', [Validators.required]],
-     
+      skill: this._formBuilder.array([])
+
     });
 
     this.educationFormGroup = this._formBuilder.group({
@@ -105,6 +106,7 @@ export class StepperFormComponent implements OnInit {
     this.experienceFormGroup = this._formBuilder.group({
       experiences: this._formBuilder.array([this.createExp()])
     });
+    //company form
     this.companyFormGroup = this._formBuilder.group({
       company_name: ['', Validators.required],
       company_bio: ['', Validators.required],
@@ -114,13 +116,58 @@ export class StepperFormComponent implements OnInit {
 
     });
   }
+  //mat-chips
+  add(event: MatChipInputEvent): void {
+    let input = event.input;
+    let value = event.value;
+
+    // Add our requirement
+    if ((value || '').trim()) {
+      const skills = this.profileFormGroup.get('skill') as FormArray;
+      skills.push(this._formBuilder.control(value.trim()));
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(index: number): void {
+    const skills = this.profileFormGroup.get('skill') as FormArray;
+
+    if (index >= 0) {
+      skills.removeAt(index);
+    }
+  }
+
+  //buttons
+  onSubmit() {
+    this.profileFormGroup.controls.email.setValue(this.user_email);
+    this.profileFormGroup.controls.username.setValue(this.user_name);
+    this._user.updateProfile(this._id, this.user_type, JSON.stringify(this.profileFormGroup.value)).subscribe(
+      data => {
+        console.log(data);
+        console.log("")
+        this.router.navigate(['/employee-feed']);
+      },
+      error => {
+        console.log("fail to updateProfile")
+      }
+
+    );
+  }
+  saveProfile() {
+
+  }
+  //experiences
   createExp(): FormGroup {
     return this._formBuilder.group({
-      job_position: ['', Validators.required],
-      company_name: ['', Validators.required],
-      exp_SD: ['', Validators.required],
-      exp_ED: ['', Validators.required],
-      exp_descp: ['', Validators.required]
+      job_position: [''],
+      company_name: [''],
+      exp_SD: [''],
+      exp_ED: [''],
+      exp_descp: ['']
     })
   }
   get expArray(): FormArray {
@@ -128,21 +175,20 @@ export class StepperFormComponent implements OnInit {
   }
   addExp(): void {
     this.experiences = this.experienceFormGroup.get('experiences') as FormArray;
-    if (!this.experiences.value == null) {
-      this.experiences.push(this.createExp());
-    }
+    this.experiences.push(this.createExp());
 
   }
   removeExp(i: number) {
     this.expArray.removeAt(i);
 
   }
+  //Educations
   createEdu(): FormGroup {
     return this._formBuilder.group({
-      institution_name: ['', Validators.required],
-      start_date: ['', Validators.required],
-      end_date: ['', Validators.required],
-      certification: ['', Validators.required]
+      institution_name: [''],
+      start_date: [''],
+      end_date: [''],
+      certification: ['']
     })
   }
   get eduArray(): FormArray {
@@ -155,39 +201,5 @@ export class StepperFormComponent implements OnInit {
   removeEdu(i: number) {
     this.eduArray.removeAt(i);
 
-  }
-
-  //mat-chip-events
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add skill
-    if ((value || '').trim()) {
-      this.skills.push({ name: value.trim() });
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-  }
-
-
-  remove(skill: Skill): void {
-    const index = this.skills.indexOf(skill);
-
-    if (index >= 0) {
-      this.skills.splice(index, 1);
-    }
-  }
-  onSubmit() {
-    console.log(this.profileFormGroup.value);
-    console.log(this.educationFormGroup.value);
-    console.log(this.experienceFormGroup.value);
-    this.router.navigate(["/employee-feed"]);
-  }
-  saveProfile(){
-    this.router.navigate(["/company-feed"]);
   }
 }

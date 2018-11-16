@@ -23,7 +23,7 @@ mongoose.connect('mongodb://admin1234:meow1234@ds046677.mlab.com:46677/intermatc
 var passport = require('passport');
 var session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-app.use(express.static(path.join(__dirname,'../dist/project')));
+app.use(express.static(path.join(__dirname,'../dist/front-end')));
 app.use(bodyParser.json());
 app.get('/', (req,res)=>{
     res.sendFile(path.join(__dirname,'../dist/project/index.html'));

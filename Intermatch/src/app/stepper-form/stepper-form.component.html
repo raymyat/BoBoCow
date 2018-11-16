@@ -19,7 +19,7 @@
                     <input matInput placeholder="Username" formControlName="username" [value]="user_name">
                 </mat-form-field> <br>
                 <mat-form-field appearance="legacy">
-                    <input matInput placeholder="Full Name" formControlName="fullname" required>
+                    <input matInput placeholder="Full Name" formControlName="full_name" required>
                 </mat-form-field> <br>
                 <mat-form-field appearance="legacy">
                     <input matInput [matDatepicker]="picker" placeholder="Birth Date" formControlName="birthdate"
@@ -28,37 +28,35 @@
                     </mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field> <br>
+                <mat-form-field appearance="legacy" hintLabel="Min 300 characters." formGroupName="description">
+                        <textarea matInput #input maxlength="3000" minlength="300" placeholder="BIO" formControlName="content"
+                            required></textarea>
+                        <mat-hint align="end">{{input.value?.length || 0}}/3000</mat-hint>
+                    </mat-form-field> <br>
+                    <mat-form-field>
+                        <mat-select placeholder="Specialization" formControlName="specialization">
+                            <mat-option *ngFor="let specialization of specializations" [value]="specialization.viewValue">
+                                {{specialization.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> <br>
 
-                <mat-form-field appearance="legacy" hintLabel="Min 300 characters.">
-                    <textarea matInput #input maxlength="3000" minlength="300" placeholder="BIO" formControlName="description"
-                        required></textarea>
-                    <mat-hint align="end">{{input.value?.length || 0}}/3000</mat-hint>
-                </mat-form-field> <br>
-                <mat-form-field>
-                    <mat-select placeholder="Specialization" formControlName="specialization">
-                        <mat-option *ngFor="let specialization of specializations" [value]="specialization.viewValue">
-                            {{specialization.viewValue}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> <br>
                 <mat-form-field class="skills-list">
                     <mat-chip-list #chipList formContr>
-                        <mat-chip *ngFor="let skill of skills" [selectable]="selectable" 
-                        [removable]="removable"
-                            (removed)="remove(skill)" >
-                            {{skill.name}}
+                        <mat-chip *ngFor="let skills of profileFormGroup.get('skill').controls;  let i = index;"
+                            [selectable]="selectable" [removable]="removable" (removed)="remove(i)">
+                            {{skills.value}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
-                        <input placeholder="Add skills..." [matChipInputFor]="chipList" 
-                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        <input placeholder="Add skills..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
                     </mat-chip-list>
-                
                 </mat-form-field>
+
                 <div>
                     <button mat-raised-button matStepperNext>Next</button>
-                </div>    
-                    
+                </div>
+
                 {{profileFormGroup.value | json}} <br>
             </form>
         </mat-step>
@@ -115,14 +113,15 @@
                     &nbsp;&nbsp;
                     <button mat-raised-button matStepperNext>Next</button>
                 </div>
+                {{educationFormGroup.value | json}}<br>
             </form>
         </mat-step>
         <mat-step [stepControl]="experienceFormGroup">
             <form [formGroup]="experienceFormGroup">
                 <ng-template matStepLabel>Experiences</ng-template>
-                <div formArrayName="experiences" *ngFor="let experience of experienceFormGroup.get('experiences').controls; let indx = index;">
-                    <div [formGroupName]="indx" class="dynamicFormField">
-                        <button mat-icon-button (click)="removeExp(indx)" class="removeChunk">
+                <div formArrayName="experiences" *ngFor="let experience of experienceFormGroup.get('experiences').controls; let i = index;">
+                    <div [formGroupName]="i" class="dynamicFormField">
+                        <button mat-icon-button (click)="removeExp(i)" class="removeChunk">
                             <mat-icon>close</mat-icon>
                         </button>
                         <mat-form-field appearance="legacy">
@@ -167,6 +166,7 @@
                     <mat-icon>add</mat-icon>
                     <mat-label>Add experiences</mat-label>
                 </button>
+                <br>
                 {{profileFormGroup.value | json}} <br>
                 {{educationFormGroup.value | json}}<br>
                 {{experienceFormGroup.value | json}}

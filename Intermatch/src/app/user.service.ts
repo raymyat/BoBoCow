@@ -44,8 +44,8 @@ export class UserService {
 
     });
   }
-  updateProfile(id, type){
-    return this._http.patch(`http://127.0.0.1:3000/users/updateProfile/${id}/${type}`,{
+  updateProfile(id, type,body:any){
+    return this._http.patch(`http://127.0.0.1:3000/users/updateProfile/${id}/${type}`,body,{
       observe:'body',
       withCredentials:true,
       headers: new HttpHeaders().append('Content-Type','application/json')
