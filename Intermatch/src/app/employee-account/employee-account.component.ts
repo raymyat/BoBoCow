@@ -41,7 +41,17 @@ export class EmployeeAccountComponent implements OnInit {
     this._user.user().subscribe(
       data => {
         this.userDetails(data);
-        console.log(this.user_email);
+        console.log(this.user_id);
+        this._user.getUserProfile(this.user_id).subscribe(
+          data=>{
+            console.log(data);
+
+          },
+          error =>{
+            console.log('error');
+
+          }
+        );
 
       },
       error => console.log('error')
@@ -90,5 +100,9 @@ export class EmployeeAccountComponent implements OnInit {
 
   ngOnInit() {
   }
+
+}
+export interface user{
+ 
 
 }

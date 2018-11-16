@@ -53,7 +53,7 @@ export class UserService {
     });
   }
   getUserProfile(id){
-    return this._http.patch(`https://agile-bayou-24340.herokuapp.com/users/userprofile/${id}`,{
+    return this._http.get(`https://agile-bayou-24340.herokuapp.com/users/userprofile/${id}`,{
       observe:'body',
       withCredentials:true,
       headers: new HttpHeaders().append('Content-Type','application/json')
