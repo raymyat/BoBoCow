@@ -32,13 +32,6 @@ export class EmployeeFeedComponent implements OnInit {
       data=> {
         this.assigndata(data);
         console.log(this._id);
-        this._user.getFeed(this._id).subscribe(
-          data=>{
-            this.jobPost.push(data);
-            console.log(this.jobPost);
-          },
-          error =>console.log("fail to get feed")
-        );
       },
       error=>console.log("fail")
     );
