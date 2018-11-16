@@ -24,10 +24,12 @@ export class EmployeeAccountComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   skills: Skill[] = [];
+  user_id: String='';
   user_type: String = '';
   user_email: String = '';
   user_name: String = '';
   userDetails(data) {
+    this.user_id = data._id;
     this.user_email = data.email;
     this.user_name = data.username;
     this.user_type = data.user_type
