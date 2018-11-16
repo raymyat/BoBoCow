@@ -44,8 +44,8 @@ export class UserService {
 
     });
   }
-  updateProfile(id, type){
-    return this._http.patch(`https://agile-bayou-24340.herokuapp.com/users/updateProfile/${id}/${type}`,{
+  updateProfile(id, type, body:any){
+    return this._http.patch(`https://agile-bayou-24340.herokuapp.com/users/updateProfile/${id}/${type}`,body,{
       observe:'body',
       withCredentials:true,
       headers: new HttpHeaders().append('Content-Type','application/json')

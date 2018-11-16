@@ -70,8 +70,7 @@ export class LoginComponent implements OnInit {
 
 
               } else if (this.user_type == "Employee") {
-                //this._router.navigate(['/employee-feed']);
-                this._router.navigate(['/first-login']);
+                this._router.navigate(['/employee-feed']);
               }
 
             } else if (this.num_of_login <= 1) {
