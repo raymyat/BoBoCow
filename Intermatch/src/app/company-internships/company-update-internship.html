@@ -1,22 +1,43 @@
 <h1 mat-dialog-title>Update job posting</h1>
 <div mat-dialog-content>
-    <mat-form-field>
-        <input matInput placeholder="Position" [(ngModel)]="data.position">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Start Date" [(ngModel)]="data.start_date">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="End Date" [(ngModel)]="data.end_date">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Deadline" [(ngModel)]="data.deadline">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Description" [(ngModel)]="data.description">
-    </mat-form-field>
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="closeDialog()">close</button>
-    <button mat-button>Update</button>
-</div>
+    <form [formGroup]="updateJobForm">
+        <mat-form-field>
+            <input matInput placeholder="Position" formControlName="title" [value] = "title"  required>
+        </mat-form-field><br>
+
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="startDatePicker" formControlName="start_date" [value] = "start_date" placeholder="Start Date"
+                required>
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="endDatePicker" formControlName="end_date" [value] = "end_date" placeholder="End Date" required>
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline" [value] = "deadline" placeholder="Deadline" required>
+            <mat-datepicker-toggle matSuffix [for]="deadlinePicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #deadlinePicker></mat-datepicker>
+        </mat-form-field><br>
+        <mat-form-field>
+            <input matInput placeholder="Specialization" formControlName="specialization" [value] = "specialization" required>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <input matInput placeholder="Description" formControlName="description" [value] = "description"  required>
+        </mat-form-field>
+
+
+    </form>
+    <div mat-dialog-actions>
+        <button mat-button (click)="closeDialog()">close</button>
+        <button mat-button (click)="save()">Update</button>
+    </div>

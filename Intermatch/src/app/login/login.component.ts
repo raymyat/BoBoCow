@@ -14,7 +14,7 @@ import {
 export class LoginComponent implements OnInit {
   user_type: String = '';
   num_of_login: Number = 0;
-  user_id = '';
+  
   hide = true;
   action = "close";
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
@@ -35,9 +35,7 @@ export class LoginComponent implements OnInit {
   firsttimeLogin(data) {
     this.num_of_login = data.num_of_login;
     this.user_type = data.user_type;
-    this.user_id = data.user_id;
     console.log(data.num_of_login);
-    console.log(data.user_id);
   }
 
   moveToRegister() {

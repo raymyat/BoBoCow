@@ -198,7 +198,7 @@
                 </mat-form-field>
                 <mat-form-field>
                     <mat-select placeholder="Company Type" formControlName="company_type">
-                        <mat-option *ngFor="let specialization of specializations" [value]="specialization.value">
+                        <mat-option *ngFor="let specialization of specializations" [value]="specialization.viewValue">
                             {{specialization.viewValue}}
                         </mat-option>
                     </mat-select>

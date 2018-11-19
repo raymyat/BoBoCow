@@ -68,21 +68,29 @@ export class UserService {
 
     });
   }
-  addJobPosting(id){
-    return this._http.get(`https://agile-bayou-24340.herokuapp.com/users/jobposting/add/${id}`,{
+  addJobPosting(id, body:any){
+    return this._http.post(`https://agile-bayou-24340.herokuapp.com/users/jobposting/add/${id}`,body,{
       observe:'body',
       withCredentials:true,
       headers: new HttpHeaders().append('Content-Type','application/json')
 
     });
   }
-  editJobPosting(jobId){
-    return this._http.patch(`https://agile-bayou-24340.herokuapp.com/users/jobposting/edit/${jobId}`,{
+  editJobPosting(jobId, body:any){
+    return this._http.patch(`https://agile-bayou-24340.herokuapp.com/users/jobposting/edit/${jobId}`,body,{
       observe:'body',
       withCredentials:true,
       headers: new HttpHeaders().append('Content-Type','application/json')
 
     });
   }
+  getJobPostingById(jobId){
+    return this._http.get(`https://agile-bayou-24340.herokuapp.com/users/getJobpostingById/${jobId}`,{
+      observe:'body',
+      withCredentials:true,
+      headers: new HttpHeaders().append('Content-Type','application/json')
 
+    });
+  }
+  
 }

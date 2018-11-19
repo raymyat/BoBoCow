@@ -1,16 +1,17 @@
 import { Deserializable } from "./deserialize.model";
 
-export class job {
+export interface job {
+    _id:String;
     title: String;
     description: String;
-    start_date: String;
-    end_date: String;
+    start_date: Date;
+    end_date: Date;
     specialization: String;
-    created_date:String;
-    deadline: String;
-    require_skills: Array<String>;
-    // require_trait_needs:Array<String>;
-    // require_trait_personality:Array<String>; 
-    // require_trait_values:Array<String>; 
+    created_date:Date;
+    deadline: Date;
+    require_skills: String;
+    require_trait_needs:Array<String>;
+    require_trait_personality:Array<String>; 
+    require_trait_values:Array<String>; 
 
 }
