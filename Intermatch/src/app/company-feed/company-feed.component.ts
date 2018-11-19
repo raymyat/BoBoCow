@@ -15,7 +15,6 @@ export class CompanyFeedComponent implements OnInit {
       data =>{
         this.getDetails(data);
         console.log(this._id);
-      
 
       },
       error => ("failure")

@@ -2,12 +2,12 @@
 <div mat-dialog-content>
     <form [formGroup]="updateJobForm">
         <mat-form-field>
-            <input matInput placeholder="Position" formControlName="title" [value] = "title"  required>
+            <input matInput placeholder="Position" formControlName="title" #title  required>
         </mat-form-field><br>
 
 
         <mat-form-field>
-            <input matInput [matDatepicker]="startDatePicker" formControlName="start_date" [value] = "start_date" placeholder="Start Date"
+            <input matInput [matDatepicker]="startDatePicker" formControlName="start_date" #start_date placeholder="Start Date"
                 required>
             <mat-datepicker-toggle matSuffix [for]="startDatePicker">
             </mat-datepicker-toggle>
@@ -15,29 +15,29 @@
         </mat-form-field><br>
 
         <mat-form-field>
-            <input matInput [matDatepicker]="endDatePicker" formControlName="end_date" [value] = "end_date" placeholder="End Date" required>
+            <input matInput [matDatepicker]="endDatePicker" formControlName="end_date" #end_date placeholder="End Date" required>
             <mat-datepicker-toggle matSuffix [for]="endDatePicker">
             </mat-datepicker-toggle>
             <mat-datepicker #endDatePicker></mat-datepicker>
         </mat-form-field><br>
 
         <mat-form-field>
-            <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline" [value] = "deadline" placeholder="Deadline" required>
+            <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline" #deadline placeholder="Deadline" required>
             <mat-datepicker-toggle matSuffix [for]="deadlinePicker">
             </mat-datepicker-toggle>
             <mat-datepicker #deadlinePicker></mat-datepicker>
         </mat-form-field><br>
         <mat-form-field>
-            <input matInput placeholder="Specialization" formControlName="specialization" [value] = "specialization" required>
+            <input matInput placeholder="Specialization" formControlName="specialization" #specialization required>
         </mat-form-field><br>
 
         <mat-form-field>
-            <input matInput placeholder="Description" formControlName="description" [value] = "description"  required>
+            <input matInput placeholder="Description" formControlName="description" #description  required>
         </mat-form-field>
 
 
     </form>
     <div mat-dialog-actions>
         <button mat-button (click)="closeDialog()">close</button>
-        <button mat-button (click)="save()">Update</button>
+        <button mat-button (click)="save(title.value, start_date.value,end_date.value,deadline.value,description.value,specialization.value)">Update</button>
     </div>

@@ -132,16 +132,9 @@ export class CompanyPostInternship {
 })
 export class CompanyUpdateInternship {
   id: string;
+  jobDetails: any = {};
   updateJobForm: FormGroup;
-  title: string;
-  start_date: Date;
-  end_date: Date;
-  deadline: Date;
-  description: string;
-  specialization: string;
-
-
-  ngOnInit() {
+  creteForm() {
     this.updateJobForm = this._formBuilder.group({
       title: ['', Validators.required],
       start_date: [''],
@@ -152,50 +145,37 @@ export class CompanyUpdateInternship {
     });
 
   }
+
+
+  ngOnInit() {
+
+
+  }
   constructor(
     public dialogRef: MatDialogRef<CompanyUpdateInternship>,
     @Inject(MAT_DIALOG_DATA) public data, private _user: UserService, private _formBuilder: FormBuilder) {
     this.id = data.id;
     console.log("id " + this.id);
+    this.creteForm();
     this._user.getJobPostingById(this.id).subscribe(
       (data) => {
-        this.getJobDetails(data);
-        console.log(data);
-        console.log(this.start_date);
-
+        this.jobDetails = data;
+        this.updateJobForm.get('title').setValue(this.jobDetails.title);
+        this.updateJobForm.get('start_date').setValue(this.jobDetails.start_date);
+        this.updateJobForm.get('end_date').setValue(this.jobDetails.end_date);
+        this.updateJobForm.get('deadline').setValue(this.jobDetails.deadline);
+        this.updateJobForm.get('description').setValue(this.jobDetails.description);
+        this.updateJobForm.get('specialization').setValue(this.jobDetails.specialization);
       }
 
     );
 
 
   }
-  getJobDetails(data) {
-    this.title = data.title;
-    this.start_date = data.start_date;
-    this.end_date = data.end_date;
-    this.deadline = data.deadline;
-    this.description = data.description;
-    this.specialization = data.specialization;
-  }
-  save() {
-
-    this.updateJobForm.controls.title.setValue(this.title);
-    this.updateJobForm.controls.start_date.setValue(this.start_date);
-    this.updateJobForm.controls.end_date.setValue(this.end_date);
-    this.updateJobForm.controls.deadline.setValue(this.deadline);
-    this.updateJobForm.controls.specialization.setValue(this.specialization);
-    this.updateJobForm.controls.description.setValue(this.description);
-
-
-    this._user.editJobPosting(this.id, JSON.stringify(this.updateJobForm.value)).subscribe(
+  save(title, start_date, end_date, deadline, description, specialization) {
+    console.log(this.id);
+    this._user.editJobPosting(this.id, title, start_date, end_date, deadline, description, specialization).subscribe(
       data => {
-        console.log(data)
-        this.updateJobForm.patchValue({
-          title: this.data.tile,
-          start_date: this.start_date,
-
-        });
-
       }
     );
     this.dialogRef.close();
