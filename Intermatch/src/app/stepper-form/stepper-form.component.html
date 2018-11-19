@@ -185,18 +185,19 @@
             <mat-card-subtitle>All form fields are required to fill up</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <form [formGroup]="">
+            <form [formGroup]="companyFormGroup">
                 <mat-form-field>
-                    <input matInput placeholder="Company Name">
+                    <input matInput placeholder="Company Name" formControlName="company_name">
+                </mat-form-field>
+                <mat-form-field hintLabel="Min 300 characters.">
+                    <textarea matInput #input maxlength="3000" minlength="300" placeholder="BIO"  formControlName="bio"></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/3000</mat-hint>
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea matInput placeholder="BIO"></textarea>
+                    <input matInput placeholder="Phone Number" formControlName="phone_no">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Phone Number">
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-select placeholder="Company Type">
+                    <mat-select placeholder="Company Type" formControlName="company_type">
                         <mat-option *ngFor="let specialization of specializations" [value]="specialization.value">
                             {{specialization.viewValue}}
                         </mat-option>
@@ -204,7 +205,7 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <textarea matInput placeholder="Address"></textarea>
+                    <textarea matInput placeholder="Address" formControlName="address"></textarea>
                 </mat-form-field>
             </form>
         </mat-card-content>

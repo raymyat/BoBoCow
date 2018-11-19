@@ -65,7 +65,7 @@ export class StepperFormComponent implements OnInit {
     this._user.user().subscribe(
       data => {
         this.userDetails(data);
-        console.log(this.user_email);
+        console.log(this.user_type);
         if (this.user_type == "Employee") {
           this.employeeDetails = true;
           console.log(this.employeeDetails);
@@ -108,10 +108,12 @@ export class StepperFormComponent implements OnInit {
     });
     //company form
     this.companyFormGroup = this._formBuilder.group({
+      email:[''],
+      username:[''],
       company_name: ['', Validators.required],
-      company_bio: ['', Validators.required],
-      company_address: ['', Validators.required],
-      company_ph_no: ['', Validators.required],
+      bio: ['', Validators.required],
+      address: ['', Validators.required],
+      phone_no: ['', Validators.required],
       company_type: ['', Validators.required],
 
     });
@@ -141,7 +143,7 @@ export class StepperFormComponent implements OnInit {
     }
   }
 
-  //buttons
+  //employee submit
   onSubmit() {
     this.profileFormGroup.controls.email.setValue(this.user_email);
     this.profileFormGroup.controls.username.setValue(this.user_name);
@@ -157,7 +159,21 @@ export class StepperFormComponent implements OnInit {
 
     );
   }
+  //company submit
   saveProfile() {
+    this.companyFormGroup.controls.email.setValue(this.user_email);
+    this.companyFormGroup.controls.username.setValue(this.user_name);
+    this._user.updateProfile(this._id, this.user_type, JSON.stringify(this.companyFormGroup.value)).subscribe(
+      data => {
+        console.log(data);
+        console.log("")
+        this.router.navigate(['/company-feed']);
+      },
+      error => {
+        console.log("fail to updateProfile")
+      }
+
+    );
 
   }
   //experiences
