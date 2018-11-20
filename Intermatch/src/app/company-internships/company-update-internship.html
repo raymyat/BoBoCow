@@ -2,7 +2,7 @@
 <div mat-dialog-content>
     <form [formGroup]="updateJobForm">
         <mat-form-field>
-            <input matInput placeholder="Position" formControlName="title" #title  required>
+            <input matInput placeholder="Position" formControlName="title" #title required>
         </mat-form-field><br>
 
 
@@ -15,14 +15,16 @@
         </mat-form-field><br>
 
         <mat-form-field>
-            <input matInput [matDatepicker]="endDatePicker" formControlName="end_date" #end_date placeholder="End Date" required>
+            <input matInput [matDatepicker]="endDatePicker" formControlName="end_date" #end_date placeholder="End Date"
+                required>
             <mat-datepicker-toggle matSuffix [for]="endDatePicker">
             </mat-datepicker-toggle>
             <mat-datepicker #endDatePicker></mat-datepicker>
         </mat-form-field><br>
 
         <mat-form-field>
-            <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline" #deadline placeholder="Deadline" required>
+            <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline" #deadline placeholder="Deadline"
+                required>
             <mat-datepicker-toggle matSuffix [for]="deadlinePicker">
             </mat-datepicker-toggle>
             <mat-datepicker #deadlinePicker></mat-datepicker>
@@ -32,7 +34,7 @@
         </mat-form-field><br>
 
         <mat-form-field>
-            <input matInput placeholder="Description" formControlName="description" #description  required>
+            <input matInput placeholder="Description" formControlName="description" #description required>
         </mat-form-field>
 
 

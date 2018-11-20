@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { job } from '../models/job.model';
@@ -72,7 +72,10 @@ export class CompanyInternshipsComponent implements OnInit {
 
   }
 }
-
+export interface trait {
+  trait_rank: Number;
+  trait_name: string;
+}
 @Component({
   selector: 'company-post-internship',
   templateUrl: 'company-post-internship.html',
@@ -80,25 +83,91 @@ export class CompanyInternshipsComponent implements OnInit {
 export class CompanyPostInternship {
   user_id: string;
   postJobForm: FormGroup;
+  trait_needs: trait[] = [];
+  trait_personality: trait[]=[];
+  trait_values: trait[] = [];
+  needs = [
+    "Curiosity", "Ideal", "Stability", "Liberty", "Excitement", "Structure", "Closeness",
+    "Love", "Challenge", "Self-expression", "Practicality", "Harmony"];
+  personality = ["Agreeableness", "Conscientiousness", "Openness", "Extraversion ", "Emotional range"];
+  values = ["Tradition", "Achievement", "Taking pleasure in life", "Stimulation", "Helping others"];
 
   ngOnInit() {
+
     this.postJobForm = this._formBuilder.group({
       title: ['', Validators.required],
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
       deadline: ['', Validators.required],
       description: ['', Validators.required],
-      specialization: ['', Validators.required]
+      specialization: ['', Validators.required],
+      trait_needs: this._formBuilder.group({
+        need_1: [''],
+        need_2:[''],
+        need_3:[''],
+        need_4:[''],
+        need_5:['']
+      }),
+      trait_values: this._formBuilder.group({
+        value_1: [''],
+        value_2:[''],
+        value_3:[''],
+        value_4:[''],
+        value_5:['']
+      }),
+      trait_personality: this._formBuilder.group({
+        pers_1: [''],
+        pers_2:[''],
+        pers_3:[''],
+        pers_4:[''],
+        pers_5:['']
+      }),
+      require_trait_needs: this._formBuilder.array([{},{},{},{},{}]),
+      require_trait_values: this._formBuilder.array([{},{},{},{},{}]),
+      require_trait_personality: this._formBuilder.array([{},{},{},{},{}])
+
+
     });
 
   }
+
   constructor(
     public dialogRef: MatDialogRef<CompanyPostInternship>,
     @Inject(MAT_DIALOG_DATA) public data, private _user: UserService, private _formBuilder: FormBuilder) { }
   getUserDetails(data) {
     this.user_id = data._id;
   }
+  
   save() {
+    this.trait_needs=[
+      {trait_rank:1,trait_name:this.postJobForm.get('trait_needs.need_1').value},
+      {trait_rank:2,trait_name:this.postJobForm.get('trait_needs.need_2').value},
+      {trait_rank:3,trait_name:this.postJobForm.get('trait_needs.need_3').value},
+      {trait_rank:4,trait_name:this.postJobForm.get('trait_needs.need_4').value},
+      {trait_rank:5,trait_name:this.postJobForm.get('trait_needs.need_5').value},
+    ];
+    this.trait_personality=[
+      {trait_rank:1,trait_name:this.postJobForm.get('trait_personality.pers_1').value},
+      {trait_rank:2,trait_name:this.postJobForm.get('trait_personality.pers_2').value},
+      {trait_rank:3,trait_name:this.postJobForm.get('trait_personality.pers_3').value},
+      {trait_rank:4,trait_name:this.postJobForm.get('trait_personality.pers_4').value},
+      {trait_rank:5,trait_name:this.postJobForm.get('trait_personality.pers_5').value}
+    ];
+      
+    this.trait_values = [
+      {trait_rank:1,trait_name:this.postJobForm.get('trait_values.value_1').value},
+      {trait_rank:2,trait_name:this.postJobForm.get('trait_values.value_2').value},
+      {trait_rank:3,trait_name:this.postJobForm.get('trait_values.value_3').value},
+      {trait_rank:4,trait_name:this.postJobForm.get('trait_values.value_4').value},
+      {trait_rank:5,trait_name:this.postJobForm.get('trait_values.value_5').value},
+
+    ];
+
+    this.postJobForm.controls.require_trait_needs.setValue(this.trait_needs);
+    this.postJobForm.controls.require_trait_values.setValue(this.trait_values);
+    this.postJobForm.controls. require_trait_personality.setValue(this.trait_personality);
+
+    console.log(this.trait_needs);
     this.dialogRef.close(this.postJobForm.value);
     if (this.postJobForm.value != null) {
       this._user.user().subscribe(
@@ -106,7 +175,7 @@ export class CompanyPostInternship {
           this.getUserDetails(data)
           this._user.addJobPosting(this.user_id, JSON.stringify(this.postJobForm.value)).subscribe(
             data => {
-              console.log("success adding job" + data);
+              console.log(this.postJobForm.value);
               this.dialogRef.close();
             }
             ,

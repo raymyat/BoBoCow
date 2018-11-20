@@ -9,29 +9,31 @@
             <button mat-raised-button (click)="onExperience()">Experiences</button><br>
         </div>
         <div class="col-sm-9">
-            <form *ngIf="profile">
+            <form *ngIf="profile" [formGroup]="profileFormGroup">
                 <mat-form-field appearance="legacy">
-                    <input matInput placeholder="Email" [value]="user_email">
+                    <input matInput placeholder="Email" formControlName="email" #email>
                 </mat-form-field> <br>
                 <mat-form-field appearance="legacy">
-                    <input matInput placeholder="Username" [value]="user_name">
+                    <input matInput placeholder="Username" formControlName="username" #username>
                 </mat-form-field> <br>
                 <mat-form-field appearance="legacy">
-                    <input matInput placeholder="Full Name" required>
+                    <input matInput placeholder="Full Name" formControlName="full_name" #full_name>
                 </mat-form-field> <br>
                 <mat-form-field appearance="legacy">
-                    <input matInput [matDatepicker]="picker" placeholder="Birth Date" required>
+                    <input matInput [matDatepicker]="picker" placeholder="Birth Date" formControlName="birthdate"
+                        #birthdate>
                     <mat-datepicker-toggle matSuffix [for]="picker">
                     </mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field> <br>
 
                 <mat-form-field appearance="legacy" hintLabel="Min 300 characters.">
-                    <textarea matInput #input maxlength="3000" minlength="300" placeholder="BIO" required></textarea>
+                    <textarea matInput #input maxlength="3000" minlength="300" placeholder="BIO" formControlName="description"
+                        #description></textarea>
                     <mat-hint align="end">{{input.value?.length || 0}}/3000</mat-hint>
                 </mat-form-field> <br>
-                <mat-form-field>
-                    <mat-select placeholder="Specialization">
+                <mat-form-field appearance="legacy">
+                    <mat-select placeholder="Specialization" formControlName="specialization" #specialization>
                         <mat-option *ngFor="let specialization of specializations" [value]="specialization.viewValue">
                             {{specialization.viewValue}}
                         </mat-option>
@@ -39,51 +41,113 @@
                 </mat-form-field> <br>
                 <mat-form-field class="skills-list">
                     <mat-chip-list #chipList formContr>
-                        <mat-chip *ngFor="let skill of skills" [selectable]="selectable" [removable]="removable"
-                            (removed)="remove(skill)">
-                            {{skill.name}}
+                        <mat-chip *ngFor="let skills of profileFormGroup.get('skill').controls;  let i = index;"
+                            [selectable]="selectable" [removable]="removable" (removed)="remove(i)">
+                            {{skills.value}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
                         <input placeholder="Add skills..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
                     </mat-chip-list>
 
-                </mat-form-field>
+                </mat-form-field><br>
+                <button mat-raised-button (click)="updateProfile()"> update profile</button>
             </form>
             <form *ngIf="education">
-                <mat-form-field appearance="legacy">
-                    <input matInput placeholder="Institution Name">
-                </mat-form-field> <br>
+                <div formArrayName="educations" *ngFor="let education of educationFormGroup.get('educations').controls; let i = index;">
+                    <div [formGroupName]="i" class="dynamicFormField">
+                        <button mat-icon-button (click)="removeEdu(i)" class="removeChunk">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                        <mat-form-field appearance="legacy">
+                            <input matInput placeholder="Institution Name" formControlName="institution_name">
+                        </mat-form-field> <br>
 
-                <table class="example-full-width" cellspacing="0">
-                    <tr>
-                        <td>
-                            <mat-form-field appearance="legacy">
-                                <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" required>
-                                <mat-datepicker-toggle matSuffix [for]="startDatePicker">
-                                </mat-datepicker-toggle>
-                                <mat-datepicker #startDatePicker></mat-datepicker>
-                            </mat-form-field>
-                        </td>
+                        <table class="example-full-width" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <mat-form-field appearance="legacy">
+                                        <input matInput [matDatepicker]="startDatePicker" formControlName="start_date"
+                                            placeholder="Start Date">
+                                        <mat-datepicker-toggle matSuffix [for]="startDatePicker">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #startDatePicker></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
 
-                        <td>
-                            <mat-form-field appearance="legacy">
-                                <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" required>
-                                <mat-datepicker-toggle matSuffix [for]="endDatePicker">
-                                </mat-datepicker-toggle>
-                                <mat-datepicker #endDatePicker></mat-datepicker>
-                            </mat-form-field> <br>
-                        </td>
-                    </tr>
-                </table>
+                                <td>
+                                    <mat-form-field appearance="legacy">
+                                        <input matInput [matDatepicker]="endDatePicker" formControlName="end_date"
+                                            placeholder="End Date">
+                                        <mat-datepicker-toggle matSuffix [for]="endDatePicker">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #endDatePicker></mat-datepicker>
+                                    </mat-form-field> <br>
+                                </td>
+                            </tr>
+                        </table>
 
-                <mat-form-field appearance="legacy">
-                    <input matInput placeholder="Certification">
-                </mat-form-field> <br>
+                        <mat-form-field appearance="legacy">
+                            <input matInput placeholder="Certification" formControlName="certification">
+                        </mat-form-field> <br>
 
+                        <hr>
+                    </div>
+                </div>
+                <button mat-icon-button (click)="addEdu()">
+                    <mat-icon>add</mat-icon>
+                    <mat-label>Add educations</mat-label>
+                </button>
 
             </form>
             <form *ngIf="experience">
+                <div formArrayName="experiences" *ngFor="let experience of experienceFormGroup.get('experiences').controls; let i = index;">
+                    <div [formGroupName]="i" class="dynamicFormField">
+                        <button mat-icon-button (click)="removeExp(i)" class="removeChunk">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                        <mat-form-field appearance="legacy">
+                            <input matInput placeholder="Job Position" formControlName="job_position">
+                        </mat-form-field> <br>
+                        <mat-form-field appearance="legacy">
+                            <input matInput placeholder="Company Name" formControlName="company_name">
+                        </mat-form-field> <br>
+
+                        <table class="example-full-width" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <mat-form-field appearance="legacy">
+                                        <input matInput [matDatepicker]="expstartDatePicker" formControlName="exp_SD"
+                                            placeholder="Start Date">
+                                        <mat-datepicker-toggle matSuffix [for]="expstartDatePicker">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #expstartDatePicker></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+
+                                <td>
+                                    <mat-form-field appearance="legacy">
+                                        <input matInput [matDatepicker]="expendDatePicker" formControlName="exp_ED"
+                                            placeholder="End Date">
+                                        <mat-datepicker-toggle matSuffix [for]="expendDatePicker">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #expendDatePicker></mat-datepicker>
+                                    </mat-form-field> <br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <mat-form-field appearance="legacy">
+                            <textarea matInput placeholder="description" formControlName="exp_descp"></textarea>
+                        </mat-form-field> <br>
+
+                        <hr>
+                    </div>
+                </div>
+                <button mat-icon-button (click)="addExp()">
+                    <mat-icon>add</mat-icon>
+                    <mat-label>Add experiences</mat-label>
+                </button>
 
             </form>
 

@@ -40,13 +40,13 @@ export class CompanyAccountComponent implements OnInit {
           data =>{
             console.log(data);
             this.companyDetails = data;
-           // this.companyFormGroup.get('email').setValue(this.companyDetails.email);
-            //this.companyFormGroup.get('username').setValue(this.companyDetails.username);
-            this.companyFormGroup.get('company_name').setValue(this.companyDetails.company_name);
-            this.companyFormGroup.get('bio').setValue(this.companyDetails.bio);
-            this.companyFormGroup.get('phone_no').setValue(this.companyDetails.phone_no);
-            this.companyFormGroup.get('company_type').setValue(this.companyDetails.company_type);
-            this.companyFormGroup.get('address').setValue(this.companyDetails.address);
+            this.companyFormGroup.get('email').setValue(this.companyDetails.userSchema.email);
+            this.companyFormGroup.get('username').setValue(this.companyDetails.userSchema.username);
+            this.companyFormGroup.get('company_name').setValue(this.companyDetails.usertypeSchema.company_name);
+            this.companyFormGroup.get('bio').setValue(this.companyDetails.usertypeSchema.bio);
+            this.companyFormGroup.get('phone_no').setValue(this.companyDetails.usertypeSchema.phone_no);
+            this.companyFormGroup.get('company_type').setValue(this.companyDetails.usertypeSchema.company_type);
+            this.companyFormGroup.get('address').setValue(this.companyDetails.usertypeSchema.address);
           }
         );
       }
@@ -57,8 +57,6 @@ export class CompanyAccountComponent implements OnInit {
       data => {
       }
     );
-
-
   }
   getUserDetails(data) {
     this.user_id = data._id;
