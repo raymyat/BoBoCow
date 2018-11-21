@@ -18,6 +18,10 @@ $color-orange: #B8977E;
     color: wheat;
   }
 
+  .mat-form-field-appearance-legacy .mat-form-field-underline{
+    color: wheat;
+  }
+
 .mat-form-field-appearance-outline .mat-form-field-ripple{
     color:#B8977E;
 }

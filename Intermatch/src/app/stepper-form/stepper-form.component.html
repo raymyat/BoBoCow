@@ -56,8 +56,6 @@
                 <div>
                     <button mat-raised-button matStepperNext>Next</button>
                 </div>
-
-                {{profileFormGroup.value | json}} <br>
             </form>
         </mat-step>
         <mat-step [stepControl]="educationFormGroup">
@@ -77,7 +75,7 @@
                                 <td>
                                     <mat-form-field appearance="legacy">
                                         <input matInput [matDatepicker]="startDatePicker" formControlName="start_date"
-                                            placeholder="Start Date" required>
+                                            placeholder="Start Date">
                                         <mat-datepicker-toggle matSuffix [for]="startDatePicker">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #startDatePicker></mat-datepicker>
@@ -87,7 +85,7 @@
                                 <td>
                                     <mat-form-field appearance="legacy">
                                         <input matInput [matDatepicker]="endDatePicker" formControlName="end_date"
-                                            placeholder="End Date" required>
+                                            placeholder="End Date">
                                         <mat-datepicker-toggle matSuffix [for]="endDatePicker">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #endDatePicker></mat-datepicker>
@@ -113,7 +111,6 @@
                     &nbsp;&nbsp;
                     <button mat-raised-button matStepperNext>Next</button>
                 </div>
-                {{educationFormGroup.value | json}}<br>
             </form>
         </mat-step>
         <mat-step [stepControl]="experienceFormGroup">
@@ -136,7 +133,7 @@
                                 <td>
                                     <mat-form-field appearance="legacy">
                                         <input matInput [matDatepicker]="expstartDatePicker" formControlName="exp_SD"
-                                            placeholder="Start Date" required>
+                                            placeholder="Start Date" >
                                         <mat-datepicker-toggle matSuffix [for]="expstartDatePicker">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #expstartDatePicker></mat-datepicker>
@@ -146,7 +143,7 @@
                                 <td>
                                     <mat-form-field appearance="legacy">
                                         <input matInput [matDatepicker]="expendDatePicker" formControlName="exp_ED"
-                                            placeholder="End Date" required>
+                                            placeholder="End Date">
                                         <mat-datepicker-toggle matSuffix [for]="expendDatePicker">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #expendDatePicker></mat-datepicker>
@@ -167,10 +164,6 @@
                     <mat-label>Add experiences</mat-label>
                 </button>
                 <br>
-                {{profileFormGroup.value | json}} <br>
-                {{educationFormGroup.value | json}}<br>
-                {{experienceFormGroup.value | json}}
-
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
                     <button mat-button matStepperNext (click)="onSubmit()">Save</button>
@@ -198,7 +191,7 @@
                 </mat-form-field>
                 <mat-form-field>
                     <mat-select placeholder="Company Type" formControlName="company_type">
-                        <mat-option *ngFor="let specialization of specializations" [value]="specialization.value">
+                        <mat-option *ngFor="let specialization of specializations" [value]="specialization.viewValue">
                             {{specialization.viewValue}}
                         </mat-option>
                     </mat-select>

@@ -9,6 +9,7 @@ import { UserhomeComponent } from './userhome/userhome.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http'; 
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule, MatFormFieldModule, MatButtonModule,
@@ -50,6 +51,7 @@ import { CompanyInternshipsComponent, CompanyPostInternship, CompanyUpdateIntern
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpModule,
     BrowserAnimationsModule,
     //Angular Material
     MatToolbarModule,

@@ -1,0 +1,23 @@
+$color-black: #343F4B;
+$color-orange: #B8977E;
+$font-arvo:'Arvo', serif;
+
+.orange{
+    height: 100%;
+    float: left;
+    width: 6%;
+    background: $color-orange;
+    overflow-y: hidden;
+}
+.mat-card{
+    .mat-card-content{
+        padding: 30px;
+        .mat-form-field{
+            width: 500px;
+        #descpTA{ 
+            height: 100px;
+        }
+    }
+    }
+    
+}

@@ -9,7 +9,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./employee-feed.component.scss']
 })
 export class EmployeeFeedComponent implements OnInit {
-  jobPosts: any[] = [];
+  jobPosts: jobPost[] = [];
   _id:String;
   title: String;
   description: String;
@@ -28,9 +28,8 @@ export class EmployeeFeedComponent implements OnInit {
         this.assignPersonalData(data);
         console.log(this.user_id);
         this._user.getFeed(this.user_id).subscribe(
-          data => {
-            this.assignJobData(data);
-            this.jobPosts.push(data);
+          (data: jobPost[]) => {
+            this.jobPosts = data;
             console.log(data);
 
           },
@@ -47,17 +46,17 @@ export class EmployeeFeedComponent implements OnInit {
     this.user_id = data._id;
   }
   
-  assignJobData(data) {
-    this.title = data.title;
-    this.description = data.description;
-    this.start_date = data.start_date;
-    this.end_date = data.end_date;
-    this.company_id = data.company_id;
-    this.specialization = data.specialization;
-    this.created_date = this.created_date;
-    this.deadline = this.deadline;
-    this.require_skills = this.require_skills;
-  }
+  // assignJobData(data) {
+  //   this.title = data.title;
+  //   this.description = data.description;
+  //   this.start_date = data.start_date;
+  //   this.end_date = data.end_date;
+  //   this.company_id = data.company_id;
+  //   this.specialization = data.specialization;
+  //   this.created_date = this.created_date;
+  //   this.deadline = this.deadline;
+  //   this.require_skills = this.require_skills;
+  // }
   ngOnInit() {
   }
 

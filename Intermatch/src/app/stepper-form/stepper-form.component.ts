@@ -150,7 +150,6 @@ export class StepperFormComponent implements OnInit {
     this._user.updateProfile(this._id, this.user_type, JSON.stringify(this.profileFormGroup.value)).subscribe(
       data => {
         console.log(data);
-        console.log("")
         this.router.navigate(['/employee-feed']);
       },
       error => {
@@ -166,7 +165,6 @@ export class StepperFormComponent implements OnInit {
     this._user.updateProfile(this._id, this.user_type, JSON.stringify(this.companyFormGroup.value)).subscribe(
       data => {
         console.log(data);
-        console.log("")
         this.router.navigate(['/company-feed']);
       },
       error => {

@@ -14,11 +14,60 @@ $font-arvo:'Arvo', serif;
         width: 200px;
         padding: 10px;
         margin: 2px;
+        border: 1px solid $color-orange;
+    }
+    button:hover{
+        color: black;
+        background: wheat;
+        border: 1px solid $color-black;
+
+
     }
 }
 .col-sm-9{
     padding: 10%;
     .mat-form-field{
+        width: 500px;
+        padding-bottom: 10px;
+        font-size: 17px;
+        textarea{
+            height: 120px;
+        }
+    }
+    button{
+        float: right;
+    }
+    button:hover{
+        color: black;
+        background: wheat;
+        border: 1px solid $color-black;
+
+
+    }
+    .mat-raised-button{
+        border: 1px solid $color-orange;
+        color:$color-black;
+        margin-top: 20px;
+        width: 150px;
         
+    }
+    td .mat-form-field{
+        width: 270px;
+        padding-right: 30px;
+    }
+    .mat-icon-button{
+        width: 200px;
+    }
+    .removeChunk{
+        width: 50px;
+        margin-left: 600px;
+    }
+    hr{
+        width: 700px;
+        border-bottom: 1px solid black;
+    }
+    .dynamicFormField .mat-form-field{
+        padding-bottom: 5px;
+
     }
 }

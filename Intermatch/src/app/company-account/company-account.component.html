@@ -1,4 +1,54 @@
 <app-company-navbar></app-company-navbar>
-<div>
-  
+<div class="orange">
+</div>
+<div class="container">
+    <h1>Company Details</h1>
+    <mat-card>
+        <mat-card-content>
+            <form [formGroup]="companyFormGroup">
+                <h5>Account access</h5>
+                <mat-form-field>
+                    <input matInput placeholder="Email" formControlName="email" #email>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="username" formControlName="username" #username>
+                </mat-form-field>
+                <hr>
+                <mat-form-field>
+                    <input matInput placeholder="Company Name" formControlName="company_name" #company_name>
+                </mat-form-field>
+                <br>
+                <mat-form-field hintLabel="Min 300 characters.">
+                    <textarea matInput  id="descpTA" #input maxlength="3000" minlength="300" placeholder="BIO" formControlName="bio" #bio></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/3000</mat-hint>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="Phone Number" formControlName="phone_no" #phone_no>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-select placeholder="Company Type" formControlName="company_type" #company_type>
+                        <mat-option *ngFor="let specialization of specializations" [value]="specialization.viewValue">
+                            {{specialization.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <textarea matInput placeholder="Address" formControlName="address" #address></textarea>
+                </mat-form-field>
+                <br>
+            </form>
+        </mat-card-content>
+        <mat-card-actions align="start">
+            <button mat-raised-button (click)="updateProfile(  company_name.value, bio.value, phone_no.value,company_type.value,address.value)"> Save </button>
+        </mat-card-actions>
+
+
+
+
+
+    </mat-card>
 </div>
