@@ -1,11 +1,52 @@
 $color-black: #343F4B;
 $color-orange: #B8977E;
+
 $font-arvo:'Arvo', serif;
 
 .orange{
-    height: 100%;
+    height: 85%;
     float: left;
     width: 6%;
     background: $color-orange;
     overflow-y: hidden;
+}
+.col-sm-9{
+    .mat-tab{
+         overflow-y: scroll; 
+         height:400px;
+    }
+ 
+
+}
+.mat-card{
+    background: rgba(184, 151, 126, 0.42);
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.text{
+    display: inline-block;
+    width: 900px;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+button{
+    background: rgba(0, 0, 0, 0.103);
+    color: black;
+    left:0;
+    width: 200px;
+
+}
+.scroll-container
+{
+  height: 750px;
+ 
+}
+.scroll-content{
+    padding-top: 10px;
+  padding-right: 10px;
+  height:700px;
+  overflow:auto;
+  background:#fff;
 }

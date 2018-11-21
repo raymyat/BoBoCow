@@ -2,10 +2,10 @@
 <div class="orange">
 </div>
 <div class="container">
-    <div>
-        <button mat-raised-button (click)="openAddDialog()">Add new button</button>
+    <div class="button" >
+        <button mat-raised-button (click)="openAddDialog()"><strong>Add new job</strong></button>
     </div>
-    <div>
+    <div class="content">
 
 
         <table mat-table [dataSource]="posted_jobs" multiTemplateDataRows class="mat-elevation-z8">
@@ -16,7 +16,7 @@
             </ng-container>
             <ng-container matColumnDef="title">
                 <th mat-header-cell *matHeaderCellDef>Position</th>
-                <td mat-cell *matCellDef="let job">{{job.title}}</td>
+                <td mat-cell *matCellDef="let job"><strong>{{job.title}}</strong></td>
             </ng-container>
             <ng-container matColumnDef="deadline">
                 <th mat-header-cell *matHeaderCellDef>Deadline</th>
@@ -28,14 +28,14 @@
                     <div class="job-detail" [@detailExpand]="job == expandedJob ? 'expanded' : 'collapsed'">
                         <div class="job-dates">
 
-                            <div>Start date: {{job.start_date | date}}</div>
-                            <div>End date: {{job.end_date | date}}</div>
+                            <div><strong>Start date:</strong><br> {{job.start_date | date}}</div>
+                            <div><strong>End date:</strong><br> {{job.end_date | date}}</div>
 
                         </div>
                         <div class="job-description">
-                            <div>Description: <br>{{job.description}}</div>
+                            <div><strong>Description:</strong> <br>{{job.description}}</div>
                         </div>
-                        <div class="job-update">
+                        <div class="job-button">
                             <button mat-raised-button (click)="openUpdateDialog(job._id)">Update</button>
                             <button mat-raised-button>Delete</button>
                         </div>

@@ -3,12 +3,15 @@
 </div>
 <div class="container">
     <div class="row">
+       
         <div class="col-sm-3">
             <button mat-raised-button (click)="onProfile()">Profile</button><br>
             <button mat-raised-button (click)="onEducation()">Educations</button><br>
             <button mat-raised-button (click)="onExperience()">Experiences</button><br>
         </div>
         <div class="col-sm-9">
+             <h3>Account settings</h3>
+             <hr><br>
             <form *ngIf="profile" [formGroup]="profileFormGroup">
                 <mat-form-field appearance="legacy">
                     <input matInput placeholder="Email" formControlName="email" #email>
@@ -39,9 +42,9 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field> <br>
-                <mat-form-field class="skills-list">
+                <!-- <mat-form-field class="skills-list">
                     <mat-chip-list #chipList formContr>
-                        <mat-chip *ngFor="let skills of profileFormGroup.get('skill').controls;  let i = index;"
+                        <mat-chip 
                             [selectable]="selectable" [removable]="removable" (removed)="remove(i)">
                             {{skills.value}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -50,8 +53,8 @@
                             [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
                     </mat-chip-list>
 
-                </mat-form-field><br>
-                <button mat-raised-button (click)="updateProfile()"> update profile</button>
+                </mat-form-field><br> -->
+                <button mat-raised-button (click)="updateProfile(email.value,username.value,full_name.value,birthdate.value,description.value,specialization.value)"> update profile</button>
             </form>
             <form *ngIf="education">
                 <div formArrayName="educations" *ngFor="let education of educationFormGroup.get('educations').controls; let i = index;">

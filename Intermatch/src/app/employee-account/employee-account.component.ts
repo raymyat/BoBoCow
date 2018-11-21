@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { UserService } from '../user.service';
 import { MatChipInputEvent } from '@angular/material';
+import {
+  MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition
+} from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
 export interface Skill {
@@ -43,6 +47,9 @@ export class EmployeeAccountComponent implements OnInit {
     this.user_id = data._id;
     this.user_type = data.user_type
   }
+  horizontalPosition: MatSnackBarHorizontalPosition = "center";
+  verticalPosition: MatSnackBarVerticalPosition = "top";
+  action="close";
 
   profile: boolean = true;
   education: boolean = false;
@@ -52,7 +59,7 @@ export class EmployeeAccountComponent implements OnInit {
   experienceFormGroup: FormGroup;
   educations: FormArray;
   experiences: FormArray;
-  constructor(private _formBuilder: FormBuilder, private _user: UserService, private router: Router) {
+  constructor(private _formBuilder: FormBuilder, private _user: UserService, private router: Router,public snackbar: MatSnackBar) {
     this._user.user().subscribe(
       data => {
         this.getUserDetails(data);
@@ -61,22 +68,39 @@ export class EmployeeAccountComponent implements OnInit {
           data => {
             this.employeeDetails = data;
             console.log(data);
-            this.profileFormGroup.get('email').setValue(this.employeeDetails.email);
-            this.profileFormGroup.get('username').setValue(this.employeeDetails.username);
-            this.profileFormGroup.get('birthdate').setValue(this.employeeDetails.birthdate);
-            this.profileFormGroup.get('description').setValue(this.employeeDetails.description);
-            this.profileFormGroup.get('specialization').setValue(this.employeeDetails.specialization);
+            this.profileFormGroup.get('email').setValue(this.employeeDetails.userSchema.email);
+            this.profileFormGroup.get('username').setValue(this.employeeDetails.userSchema.username);
+            this.profileFormGroup.get('birthdate').setValue(this.employeeDetails.usertypeSchema.birthdate);
+            this.profileFormGroup.get('description').setValue(this.employeeDetails.usertypeSchema.description[0].content);
+            this.profileFormGroup.get('full_name').setValue(this.employeeDetails.usertypeSchema.full_name); 
+            this.profileFormGroup.get('specialization').setValue(this.employeeDetails.usertypeSchema.specialization);
           },error => console.log('error to get userprofile'));
          },
       error => console.log('error')
     );
 
   }
-  updateProfile(company_name, email,username,full_name,birthdate,description,specialization,skills) {
-    this._user.updateEmployeeProfile(this.user_id,this.user_type, email,username,full_name,birthdate,description,specialization,skills).subscribe(
+  invalidSnackBar(message: string, action: string) {
+    let config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.verticalPosition = this.verticalPosition;
+    config.horizontalPosition = this.horizontalPosition;
+    config.panelClass = ['error-snackbar'];
+    this.snackbar.open(message, action, config);
+
+  }
+  updateProfile(email,username,full_name,birthdate,description,specialization) {
+    this._user.updateEmployeeProfile(this.user_id,this.user_type, email,username,full_name,birthdate,description,specialization).subscribe(
       data => {
+        console.log(data);
+        this.invalidSnackBar("update success", this.action);
+      },
+      error=>{
+        console.log(email,username,full_name,birthdate,description,specialization)
+        this.invalidSnackBar("Fill up necessary fills", this.action);
       }
     );
+  
   }
   ngOnInit() {
     this.profileFormGroup = this._formBuilder.group({
@@ -85,8 +109,7 @@ export class EmployeeAccountComponent implements OnInit {
       full_name:[''],
       birthdate:[''],
       description:[''],
-      specialization:[''],
-      skill: this._formBuilder.array([])
+      specialization:['']
     });
     this.educationFormGroup = this._formBuilder.group({
 

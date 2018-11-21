@@ -68,15 +68,15 @@ export class UserService {
 
     });
   }
-  updateEmployeeProfile(id,type,email,username,full_name,birthdate,description,specialization,skills){
+  updateEmployeeProfile(id,type,email,username,full_name,birthdate,description,specialization){
+    console.log(description);
     const employee={
       email: email,
       username: username,
       full_name: full_name,
       birthdate: birthdate,
-      description: description, 
-      specialization:specialization, 
-      skills: skills
+      description:{content:description}, 
+      specialization:specialization
     }
     return this._http.patch(`https://agile-bayou-24340.herokuapp.com/users/updateProfile/${id}/${type}`,employee,{
       observe:'body',

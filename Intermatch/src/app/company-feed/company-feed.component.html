@@ -4,19 +4,28 @@
 <div class="container">
     <mat-tab-group>
         <mat-tab label="Discover">
-            <mat-card *ngFor="let employee of employeeList" class="col-sm-3">
-                <mat-card-title>
-                    {{employee.full_name}} 
-                </mat-card-title>
-                <mat-card-subtitle>
-                    {{employee.specialization}}<br>
-                    {{employee.birthdate | date}}<br>
-                   {{employee.description[0].content}}
-                </mat-card-subtitle>
-                <mat-card-actions>
-                    <button mat-stroked-button>apply</button>
-                </mat-card-actions>
-            </mat-card>
+            <div class="scroll-container">
+                <div class="scroll-content">
+                    <mat-card *ngFor="let employee of employeeList">
+                        <mat-card-title>
+                            {{employee.full_name}}
+                        </mat-card-title>
+                        <hr>
+                        <mat-card-subtitle>
+                            <strong>Specialization: &nbsp;{{employee.specialization}}<br>
+                            Birthdate: {{employee.birthdate | date}}<br>
+                            <hr>
+                            Introduction:<br>
+                            <span class="text">{{employee.description[0].content}}</span>.....</strong>
+                        </mat-card-subtitle>
+                        <mat-card-actions>
+                            <button mat-stroked-button (click)="openViewDialog(employee._id)">View Profile</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+
+
 
         </mat-tab>
         <mat-tab label="Matched">

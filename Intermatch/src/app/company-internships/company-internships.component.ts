@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { job } from '../models/job.model';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 @Component({
   selector: 'app-company-internships',
   templateUrl: './company-internships.component.html',
@@ -27,6 +28,8 @@ export class CompanyInternshipsComponent implements OnInit {
   user_id: string;
   columnsList = ['created_date', 'title', 'deadline'];
   expandedJob: job;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(public dialog: MatDialog, private _user: UserService, private router: Router) {
     this._user.user().subscribe(
       data => {

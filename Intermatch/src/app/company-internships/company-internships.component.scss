@@ -9,14 +9,28 @@ $font-arvo:'Arvo', serif;
     background: $color-orange;
     overflow-y: hidden;
 }
+.button{
+    float:right;
+    padding: 30px;
+    text-decoration: underline;
+    button{
+        width: 200px;
+        background: $color-black;
+        color:whitesmoke;
+    }
+}
 
+.content{
+    margin: 30px;
+}
 table {
-
     width: 100%;
+    border: 1px solid wheat;
   }
   
 tr.detail-row {
     height: 0;
+    padding: 10px;
   }
   
 tr.job-row:not(.expanded-row):hover {
@@ -43,8 +57,17 @@ tr.job-row:not(.expanded-row):active {
         font-style: italic;
         width: 100px;
     }
-    .job-update{
+    .job-button{
         padding-left:18px;
+        button{
+            width:100px;
+            margin-top: 10px;
+        }
+        button:hover{
+            background: $color-orange;
+            color:black;
+            text-decoration: underline;
+        }
     }
   }
   

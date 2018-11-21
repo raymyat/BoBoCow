@@ -16,12 +16,12 @@ import {MatToolbarModule, MatFormFieldModule, MatButtonModule,
   MatCheckboxModule,MatSlideToggleModule, 
   MatIconModule,MatInputModule,MatSelectModule,
   MatSnackBarModule,MatStepperModule, MatChipsModule,
-  MatDatepickerModule,MatNativeDateModule,MatCardModule,MatDialogModule,
-  MatTabsModule,MatTableModule} from '@angular/material';
+  MatDatepickerModule,MatNativeDateModule,MatCardModule,MatDialogModule,MatPaginatorModule,
+  MatTabsModule,MatAutocompleteModule,MatTableModule,MatDividerModule} from '@angular/material';
 import { StepperFormComponent } from './stepper-form/stepper-form.component';
 import { EmpolyeeNavbarComponent } from './empolyee-navbar/empolyee-navbar.component';
 import { CompanyNavbarComponent } from './company-navbar/company-navbar.component';
-import { CompanyFeedComponent } from './company-feed/company-feed.component';
+import { CompanyFeedComponent,ViewProfile } from './company-feed/company-feed.component';
 import { EmployeeFeedComponent, ViewInternship } from './employee-feed/employee-feed.component';
 import { EmployeeAccountComponent } from './employee-account/employee-account.component';
 import { CompanyAccountComponent } from './company-account/company-account.component';
@@ -39,6 +39,7 @@ import { CompanyInternshipsComponent, CompanyPostInternship, CompanyUpdateIntern
     CompanyFeedComponent,
     EmployeeFeedComponent,
     ViewInternship,
+    ViewProfile,
     EmployeeAccountComponent,
     CompanyAccountComponent,
     CompanyInternshipsComponent,
@@ -54,6 +55,7 @@ import { CompanyInternshipsComponent, CompanyPostInternship, CompanyUpdateIntern
     HttpModule,
     BrowserAnimationsModule,
     //Angular Material
+    MatAutocompleteModule,
     MatToolbarModule,
     MatFormFieldModule, 
     MatButtonModule,
@@ -70,9 +72,11 @@ import { CompanyInternshipsComponent, CompanyPostInternship, CompanyUpdateIntern
     MatCardModule,
     MatTabsModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatDividerModule
   ],
-  entryComponents: [EmployeeFeedComponent, ViewInternship, CompanyInternshipsComponent, CompanyPostInternship,CompanyUpdateInternship],
+  entryComponents: [EmployeeFeedComponent, ViewInternship,CompanyFeedComponent, ViewProfile, CompanyInternshipsComponent, CompanyPostInternship,CompanyUpdateInternship],
   providers: [UserService],
   bootstrap: [AppComponent]
 })

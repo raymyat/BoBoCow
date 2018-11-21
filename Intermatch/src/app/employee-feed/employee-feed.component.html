@@ -4,17 +4,31 @@
 <div class="container">
     <mat-tab-group>
         <mat-tab label="Discovered">
-            <mat-card *ngFor="let jobPost of jobPosts">
-                <mat-card-title>
-                    {{jobPost.title}}
-                </mat-card-title>
-                <mat-card-subtitle>
-                    {{jobPost.description}} 
-                </mat-card-subtitle>
-                <mat-card-actions>
-                    <button mat-stroked-button>apply</button>
-                </mat-card-actions>
-            </mat-card>
+            <div class="scroll-container">
+                <div class="scroll-content">
+                    <mat-card *ngFor="let jobPost of jobPosts">
+                        <mat-card-title>
+                            {{jobPost.title }}
+                        </mat-card-title>
+                        <hr>
+                        <mat-card-subtitle>
+                            <span class="text"><strong>{{jobPost.description}}</strong></span>
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Start date:&nbsp;<strong>{{jobPost.start_date | date}}</strong>&nbsp; End date:&nbsp;<strong>{{jobPost.end_date
+                                | date}}</strong>
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Application deadline: <br> <strong>{{jobPost.deadline | date}}</strong>
+                        </mat-card-subtitle>
+                        <hr>
+                        <mat-card-actions>
+                            <button mat-stroked-button (click)="openViewDialog(jobPost._id)"><strong>View</strong></button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+
         </mat-tab>
 
         <mat-tab label="Matched">
@@ -23,9 +37,17 @@
                     {{jobPost.title}}
                 </mat-card-title>
                 <mat-card-subtitle>
-                    {{jobPost.description}}
+                    <span class="text"><strong>{{jobPost.description}}</strong></span>
                 </mat-card-subtitle>
+                <mat-card-subtitle>
+                    Start date:&nbsp;<strong>{{jobPost.start_date | date}}</strong>&nbsp; End date:&nbsp;<strong>{{jobPost.end_date
+                        | date}}</strong>
+                </mat-card-subtitle>
+                <mat-card-actions>
+                    <button mat-stroked-button (click)="openViewDialog(jobPost._id)"><strong>Contact company</strong></button>
+                </mat-card-actions>
             </mat-card>
+
         </mat-tab>
 
         <mat-tab label="Applied">
@@ -34,10 +56,15 @@
                     {{jobPost.title}}
                 </mat-card-title>
                 <mat-card-subtitle>
-                     {{jobPost.description}} 
+                    <span class="text"><strong>{{jobPost.description}}</strong></span>
                 </mat-card-subtitle>
+                <mat-card-actions>
+                    <button mat-stroked-button (click)="openViewDialog(jobPost._id)"><strong>View Status</strong></button>
+                </mat-card-actions>
             </mat-card>
+
         </mat-tab>
-        
+
+
     </mat-tab-group>
 </div>

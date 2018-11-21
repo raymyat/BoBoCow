@@ -36,4 +36,27 @@ $color-orange: #B8977E;
 .mat-step-header .mat-step-icon {
     background-color: wheat;
     color:#343F4B;
-  } 
+} 
+.mat-tab-label{
+    background: #343F4B;
+    color:white;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background:  wheat
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+

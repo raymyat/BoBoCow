@@ -1,8 +1,16 @@
-<h1 mat-dialog-title>Hi {{jobPost.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+<div mat-dialog-title>
+  <h1>{{title}}</h1>
+</div>
+<hr>
+<div mat-dialog-content style="background: rgba(184, 151, 126, 0.11);">
+  <p><strong>Posted date:</strong> {{created_date | date}}</p>
+  <p><strong>Company name:</strong> {{company_name}}</p>
+  <p><strong>Specialization:</strong> {{specialization}}</p>
+  <p><strong>Description:</strong> <br> {{description}}</p>
+  <p><strong>Duration:</strong> {{start_date | date}} to {{end_date | date}}</p>
+  <p><strong>Deadline:</strong> {{deadline | date}}</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button>Apply</button>
+  <button mat-button (click)="onNoClick()">close</button>
 </div>

@@ -1,0 +1,24 @@
+<div mat-dialog-title>
+    <h1>{{full_name}}</h1>
+</div>
+<hr>
+<div mat-dialog-content style="background: rgba(184, 151, 126, 0.11);">
+    <p><strong>Specialization:</strong> {{specialization}}</p>
+    <p><strong>Birthdate:</strong> {{birthdate | date}}</p>
+    <hr>
+    <strong>
+        <p> Matches {{job_name_list.length}} jobs</p>
+    </strong>
+    <ul>
+        <li *ngFor="let name of job_name_list;">{{name}}</li>
+    </ul>
+
+    <hr>
+    <p><strong>Introduction:</strong> <br> {{description}}</p>
+
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button>Send invitation</button>
+    <button mat-button (click)="onNoClick()">close</button>
+</div>

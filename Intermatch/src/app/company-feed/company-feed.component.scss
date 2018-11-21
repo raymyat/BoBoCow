@@ -3,9 +3,51 @@ $color-orange: #B8977E;
 $font-arvo:'Arvo', serif;
 
 .orange{
-    height: 100%;
+    height: 85%;
     float: left;
     width: 6%;
     background: $color-orange;
     overflow-y: hidden;
+}
+.container{
+    .scroll-container{
+        height: 750px;
+        .scroll-content{
+            padding-top: 10px;
+            padding-right: 10px;
+            margin-left: 70px;
+            height:700px;
+            overflow:auto;
+            background:#fff;
+            .mat-card{
+                background: rgba(184, 151, 126, 0.42);
+                margin-bottom: 20px;
+                margin-top: 5px;
+                height: 310px;
+                width: 400px;
+                float:left;
+                margin-right: 70px;
+                .text{
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    line-height: 16px;     /* fallback */
+                    max-height: 32px;      /* fallback */
+                    -webkit-line-clamp: 4; /* number of lines to show */
+                    -webkit-box-orient: vertical;
+                }
+                button{
+                    background: rgba(0, 0, 0, 0.103);
+                    color: black;
+                    left:0;
+                    width: 200px;
+                
+                }
+            }
+        }
+
+    }
+
+    
+
 }
