@@ -13,13 +13,21 @@ h1{
     text-align: center;
     padding-top:10px;
     padding-bottom: 10px;
+    text-decoration: underline;
+    font-weight: 2px;
+}
+hr{
+    border: 1px solid black;
 }
 .mat-card{ 
     border: 1px solid wheat;
     .mat-card-content{
-        padding-left: 80px;
+       margin-left:190px;
+       margin-right:100px;
         .mat-form-field{
-            width: 550px;
+            margin-left:20px;
+            width: 600px;
+            color: black;
             font-size:14px;
             padding: 5px;
             input{
