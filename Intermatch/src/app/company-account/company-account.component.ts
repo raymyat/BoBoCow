@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import {
+  MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition
+} from '@angular/material';
 export interface Specialization {
   value: string;
   viewValue: string;
@@ -15,6 +19,9 @@ export interface Specialization {
 
 
 export class CompanyAccountComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = "center";
+  verticalPosition: MatSnackBarVerticalPosition = "top";
+  action="close";
   user_id: string;
   user_type:string;
   companyFormGroup: FormGroup;
@@ -32,7 +39,7 @@ export class CompanyAccountComponent implements OnInit {
     { value: "specialization-10", viewValue: "Law and Law Enforcement" },
   ];
 
-  constructor(private _user: UserService,private _router: Router, private _formBuilder: FormBuilder) {
+  constructor(private _user: UserService,private _router: Router, private _formBuilder: FormBuilder,public snackbar: MatSnackBar) {
     this._user.user().subscribe(
       data => {
         this.getUserDetails(data);
@@ -55,12 +62,25 @@ export class CompanyAccountComponent implements OnInit {
   updateProfile(company_name, bio, phone_no,company_type,address) {
     this._user.updateCompanyProfile(this.user_id,this.user_type, company_name, bio, phone_no,company_type,address).subscribe(
       data => {
+        console.log(data);
+        this.invalidSnackBar("update success", this.action);
+      }, error=>{
+        this.invalidSnackBar("Fill up necessary fills", this.action);
       }
     );
   }
   getUserDetails(data) {
     this.user_id = data._id;
     this.user_type = data.user_type
+  }
+  invalidSnackBar(message: string, action: string) {
+    let config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.verticalPosition = this.verticalPosition;
+    config.horizontalPosition = this.horizontalPosition;
+    config.panelClass = ['error-snackbar'];
+    this.snackbar.open(message, action, config);
+
   }
 
 
